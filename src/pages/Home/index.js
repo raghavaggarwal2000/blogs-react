@@ -1,34 +1,10 @@
 import { useEffect, useState } from "react";
 import { BlogList } from "../../components";
+import useFetch from "../../customHooks/useFetch";
 
 const Home = () => {
-    const [blogs, setBlogs] = useState(null);
-    const [isLoading, setIsLoading] = useState(true);
-    const [error, setError] = useState(null);
-
-    const handleDelete = (id) =>{
-      const newblogs = blogs.filter(blog => blog.id !== id);
-      setBlogs(newblogs);
-    }
-
-    useEffect(() =>{
-      fetch('http://localhost:8000/blogss')
-        .then(res =>{
-          if(!res.ok){
-            throw Error("Couldn't fetch the error")
-          }
-          return res.json();
-        })
-        .then(data =>{
-          setBlogs(data);
-          setIsLoading(false);
-          setError(null);
-        })
-        .catch(err => {
-          setError(err.message);
-          setIsLoading(false);
-        })
-    }, []);
+    const {data: blogs, isLoading, error} = useFetch("http://localhost:8000/blogs")
+    const {data: x, setData: setX} = useFetch("http://localhost:8000/test")
 
     return ( 
         <div className="home">
@@ -38,7 +14,14 @@ const Home = () => {
             <BlogList 
             blogs = {blogs}
             title = "All Blogs"
-            handleDelete = {handleDelete}
+            // handleDelete = {handleDelete}
+            />}
+
+        {x && 
+            <BlogList 
+            blogs = {x}
+            title = "All Blogs"
+            // handleDelete = {handleDelete}
             />}
         </div>
      );
