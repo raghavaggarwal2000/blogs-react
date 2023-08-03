@@ -4,7 +4,6 @@ import useFetch from "../../customHooks/useFetch";
 
 const Home = () => {
     const {data: blogs, isLoading, error} = useFetch("http://localhost:8000/blogs")
-    const {data: x, setData: setX} = useFetch("http://localhost:8000/test")
 
     return ( 
         <div className="home">
@@ -17,12 +16,6 @@ const Home = () => {
             // handleDelete = {handleDelete}
             />}
 
-        {x && 
-            <BlogList 
-            blogs = {x}
-            title = "All Blogs"
-            // handleDelete = {handleDelete}
-            />}
         </div>
      );
 }

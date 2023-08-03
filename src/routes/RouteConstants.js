@@ -1,6 +1,7 @@
 const Routes = {
-    HOME: '/',
-    CREATE: '/create'
+    HOME: '/home',
+    CREATE: '/create',
+    BLOGDETAILS: '/blogs/:id'
 }
 
 export default Routes;
